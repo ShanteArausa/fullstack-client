@@ -6,6 +6,8 @@ function App() {
   const [name, setName] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
 
   const API = "http://localhost:3000/users";
 
@@ -34,6 +36,9 @@ function App() {
       } else {
         // CREATE
         await axios.post(API, { name });
+        setMessage("User added successfully ✅");
+        setError(null);
+        setTimeout(() => setMessage(null), 3000);
       }
 
       setName("");
@@ -50,6 +55,9 @@ function App() {
     } catch (error) {
       console.error("Error deleting user:", error);
     }
+    setMessage("User deleted successfully ✅");
+    setError(null);
+    setTimeout(() => setMessage(null), 3000);
   };
 
   useEffect(() => {
@@ -60,7 +68,8 @@ function App() {
     <div className="container">
       <div className="card">
         <h1>Full Stack User Manager</h1>
-
+        {message && <p style={{ color: "green" }}>{message}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <div className="form">
           <input
             type="text"
