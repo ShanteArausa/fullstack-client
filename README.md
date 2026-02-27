@@ -1,16 +1,50 @@
-# React + Vite
+# Fullstack Client (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A deployed React + Vite frontend connected to a live Node.js / Express backend and MongoDB Atlas database.
 
-Currently, two official plugins are available:
+## 🔗 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Frontend:
+https://fullstack-client-vert.vercel.app
 
-## React Compiler
+Backend API:
+https://database-backend-app.onrender.com/users
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React (Vite)
+- Axios
+- Node.js
+- Express
+- MongoDB Atlas
+- Render (Backend Hosting)
+- Vercel (Frontend Hosting)
+
+---
+
+## ✨ Features
+
+- Add Users
+- Edit Users
+- Delete Users
+- Persistent cloud database storage
+- Fully deployed full-stack architecture
+
+---
+
+## 🧠 What I Learned
+
+- Connecting React to a production backend
+- Deploying Node/Express to Render
+- Configuring MongoDB Atlas for cloud access
+- Fixing CORS issues in production
+- Managing deployment build caches
+- Debugging real-world 404 and network errors
+
+---
+
+## ⚙️ Local Development
+
+Clone the repo:
