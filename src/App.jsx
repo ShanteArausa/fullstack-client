@@ -9,7 +9,7 @@ function App() {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
 
-  const API = "http://localhost:3000/users";
+  const API = "https://your-backend.onrender.com/users";
 
   // Fetch users
   const fetchUsers = async () => {
