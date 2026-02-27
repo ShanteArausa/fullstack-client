@@ -35,6 +35,7 @@ function App() {
         setEditingId(null);
       } else {
         // CREATE
+        console.log("Sending name:", name);
         await axios.post(API, { name });
         setMessage("User added successfully ✅");
         setError(null);
