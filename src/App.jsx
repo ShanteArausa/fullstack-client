@@ -78,8 +78,8 @@ function App() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <button onClick={handleSubmit}>
-            {editingId ? "Update User" : "Add User"}
+          <button onClick={handleSubmit} disabled={loading}>
+            {loading ? "Processing..." : editingId ? "Update User" : "Add User"}
           </button>
         </div>
         {loading && <div className="loader"></div>}
@@ -97,7 +97,14 @@ function App() {
                   Edit
                 </button>
 
-                <button className="delete" onClick={() => deleteUser(user._id)}>
+                <button
+                  className="delete"
+                  disabled={loading}
+                  onClick={() => {
+                    if (!window.confirm("Are you sure?")) return;
+                    deleteUser(user._id);
+                  }}
+                >
                   Delete
                 </button>
               </div>
