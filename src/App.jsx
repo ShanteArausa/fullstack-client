@@ -24,7 +24,7 @@ function App() {
     }
   };
 
-  // Add user
+  // Create or update user
   const handleSubmit = async () => {
     if (!name.trim()) return;
 
