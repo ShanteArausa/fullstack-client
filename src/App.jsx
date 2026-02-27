@@ -4,32 +4,44 @@ import axios from "axios";
 function App() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const API = "http://localhost:3000/users";
 
   // Fetch users
   const fetchUsers = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(API);
       setUsers(res.data);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   // Add user
-  const addUser = async () => {
+  const handleSubmit = async () => {
     if (!name.trim()) return;
 
     try {
-      await axios.post(API, { name });
+      if (editingId) {
+        // UPDATE
+        await axios.put(`${API}/${editingId}`, { name });
+        setEditingId(null);
+      } else {
+        // CREATE
+        await axios.post(API, { name });
+      }
+
       setName("");
       fetchUsers();
     } catch (error) {
-      console.error("Error adding user:", error);
+      console.error("Error saving user:", error);
     }
   };
-
   // Delete user
   const deleteUser = async (id) => {
     try {
@@ -45,36 +57,46 @@ function App() {
   }, []);
 
   return (
-  <div className="container">
-    <div className="card">
-      <h1>Full Stack User Manager</h1>
+    <div className="container">
+      <div className="card">
+        <h1>Full Stack User Manager</h1>
 
-      <div className="form">
-        <input
-          type="text"
-          placeholder="Enter name..."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button onClick={addUser}>Add User</button>
+        <div className="form">
+          <input
+            type="text"
+            placeholder="Enter name..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button onClick={handleSubmit}>
+            {editingId ? "Update User" : "Add User"}
+          </button>
+        </div>
+        {loading && <div className="loader"></div>}
+        <ul>
+          {users.map((user) => (
+            <li key={user._id}>
+              <span>{user.name}</span>
+              <div>
+                <button
+                  onClick={() => {
+                    setName(user.name);
+                    setEditingId(user._id);
+                  }}
+                >
+                  Edit
+                </button>
+
+                <button className="delete" onClick={() => deleteUser(user._id)}>
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>
-            <span>{user.name}</span>
-            <button
-              className="delete"
-              onClick={() => deleteUser(user._id)}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
-  </div>
-);
+  );
 }
 
 export default App;
